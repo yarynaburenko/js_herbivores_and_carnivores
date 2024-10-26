@@ -1,12 +1,12 @@
 'use strict';
 
 class Animal {
-  static alive = [];
+  static alive = []; // Масив для зберігання всіх живих тварин
 
   constructor(name) {
     this.name = name;
     this.health = 100;
-    Animal.alive.push(this);
+    Animal.alive.push(this); // Додаємо нову тварину до масиву живих
   }
 
   checkHealth() {
@@ -23,18 +23,22 @@ class Herbivore extends Animal {
   }
 
   hide() {
-    this.hidden = true;
+    this.hidden = true; // Травоїдна тварина ховається
+  }
+
+  unhide() {
+    this.hidden = false; // Травоїдна тварина виходить із сховку
   }
 }
 
 class Carnivore extends Animal {
   bite(animal) {
-    if (!(animal instanceof Herbivore) || animal.hidden) {
+    if (!(animal instanceof Animal) || animal.hidden) {
       return;
     }
 
-    animal.health -= 50;
-    animal.checkHealth();
+    animal.health -= 50; // Зменшуємо здоров'я травоїдного
+    animal.checkHealth(); // Перевіряємо, чи тварина залишилася живою
   }
 }
 
